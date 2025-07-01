@@ -35,20 +35,7 @@ Projeyi canlı olarak incelemek için [buraya tıklayın](https://ibrahim-himidi
 
 ---
 
-## Dosya Yapısı
 
-/
-├── index.html # Ana HTML sayfası
-├── style.css # Özel CSS (Tailwind dışında, varsa)
-├── main.js # Uygulama işlevlerinin JavaScript kodları
-├── README.md # Proje açıklamaları
-└── assets/ # Görseller ve statik dosyalar (varsa)
-
-yaml
-Copy
-Edit
-
----
 
 ## Kurulum ve Kullanım
 
