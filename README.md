@@ -8,6 +8,12 @@ Projede gerçek zamanlı veriler için [Spoonacular API](https://spoonacular.com
 
 ---
 
+## Canlı Demo
+
+Projeyi canlı olarak incelemek için [buraya tıklayın](https://ibrahim-himidi.github.io/tariflerim-app-IYU228/).
+
+---
+
 ## Özellikler
 
 - Malzemeye göre tarif arama  
@@ -29,4 +35,24 @@ Projede gerçek zamanlı veriler için [Spoonacular API](https://spoonacular.com
 
 ---
 
+## Dosya Yapısı
 
+/
+├── index.html # Ana HTML sayfası
+├── style.css # Özel CSS (Tailwind dışında, varsa)
+├── main.js # Uygulama işlevlerinin JavaScript kodları
+├── README.md # Proje açıklamaları
+└── assets/ # Görseller ve statik dosyalar (varsa)
+
+yaml
+Copy
+Edit
+
+---
+
+## Kurulum ve Kullanım
+
+1. Depoyu klonlayın veya indirin:
+
+```bash
+git clone https://github.com/ibrahim-Himidi/tariflerim-app-IYU228.git
