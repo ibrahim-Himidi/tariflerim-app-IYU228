@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Lezzetli ve pratik yemek tarifleri. Malzemelerinize göre tarif bulun veya rastgele öneriler alın!">
+    <meta name="keywords" content="yemek tarifleri, tarif bul, mutfak, yemek pişirme, kolay tarifler">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Yemek Tarifleri</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="m-0 p-0 overflow-x-hidden bg-gray-100 ">
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-white/30 shadow-sm">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between text-lg">
+   
+            <h1 class="text-2xl font-bold text-orange-600 ">
+                <i class="fas fa-utensils mr-2"></i>Tariflerim
+            </h1>
+
+            <!-- Masaüstü Menü -->
+            <nav class="space-x-6 hidden md:flex">
+                <a href="#ingredientsSection" class="text-gray-800 font-medium hover:text-orange-500 transition">Malzeme
+                    ile Ara</a>
+                <a href="#searchInput" class="text-gray-800 font-medium hover:text-orange-500 transition">Yemek Adı</a>
+                <a href="#randomRecipesSection"
+                    class="text-gray-800 font-medium hover:text-orange-500 transition">Öneriler</a>
+            </nav>
+
+            <!-- Mobil Menü Butonu -->
+            <button onclick="toggleMenu()"
+                class="md:hidden text-2xl text-orange-600 focus:outline-none relative w-8 h-8">
+                <i id="menuIcon" class="fas fa-bars absolute inset-0 transition-opacity duration-300 opacity-100"></i>
+                <i id="closeIcon" class="fas fa-times absolute inset-0 transition-opacity duration-300 opacity-0"></i>
+            </button>
+        </div>
+
+        <!-- Mobil Menü -->
+        <div id="mobileMenu"
+            class="md:hidden overflow-hidden max-h-0 opacity-0 transition-all duration-500 ease-in-out px-6 bg-white/30 backdrop-blur-lg shadow-sm">
+            <a href="#ingredientsSection"
+                class="block py-2 text-gray-800 font-medium hover:text-orange-500 transition">Malzeme ile Ara</a>
+            <a href="#searchInput" class="block py-2 text-gray-800 font-medium hover:text-orange-500 transition">Yemek
+                Adı</a>
+            <a href="#randomRecipesSection"
+                class="block py-2 text-gray-800 font-medium hover:text-orange-500 transition">Öneriler</a>
+        </div>
+    </header>
+
+    <!-- Hero Slider -->
+    <section class="relative w-full h-[60vh] sm:h-[80vh] lg:h-screen" id="heroSlider">
+        <div class="absolute inset-0 w-full h-full slider-fade opacity-100" id="slide-0">
+            <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1600&q=80"
+                class="w-full h-full object-cover" alt="Lezzetli yemek tabağı">
+            <div
+                class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center text-white px-4">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Taze Malzemelerle Harika
+                    Lezzetler</h1>
+                <p class="text-base sm:text-lg md:text-xl lg:text-2xl">Evde ne varsa ondan şahane yemekler çıkar!</p>
+            </div>
+        </div>
+        <div class="absolute inset-0 w-full h-full slider-fade opacity-0" id="slide-1">
+            <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1600"
+                class="w-full h-full object-cover" alt="Sağlıklı yemek tabağı">
+            <div
+                class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center text-white px-4">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Yemek Yapmak Artık Kolay</h1>
+                <p class="text-base sm:text-lg md:text-xl lg:text-2xl">Arama yap, tarif bul, hemen pişir!</p>
+            </div>
+        </div>
+        <div class="absolute inset-0 w-full h-full slider-fade opacity-0" id="slide-2">
+            <img src="https://images.pexels.com/photos/708488/pexels-photo-708488.jpeg"
+                class="w-full h-full object-cover" alt="Renkli yemek tabağı">
+            <div
+                class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center text-white px-4">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Her Gün İlham Veren Tarifler
+                </h1>
+                <p class="text-base sm:text-lg md:text-xl lg:text-2xl">Bugün ne pişirsem derdine son!</p>
+            </div>
+        </div>
+        <div class="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+            <span class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-white opacity-60 cursor-pointer" id="dot-0"
+                onclick="changeSlide(0)"></span>
+            <span class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-white opacity-60 cursor-pointer" id="dot-1"
+                onclick="changeSlide(1)"></span>
+            <span class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-white opacity-60 cursor-pointer" id="dot-2"
+                onclick="changeSlide(2)"></span>
+        </div>
+    </section>
+
+    <!-- Keşfet -->
+    <section class="py-12 sm:py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-8 sm:mb-12 text-gray-900">Nasıl Kullanılır?
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10">
+                <div onclick="document.getElementById('ingredientsSection').scrollIntoView({ behavior: 'smooth' })"
+                    class="cursor-pointer bg-white rounded-2xl shadow-lg p-6 sm:p-10 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-2xl">
+                    <div class="bg-orange-100 text-orange-600 rounded-full p-4 sm:p-5 mb-4 sm:mb-6 shadow-md">
+                        <i class="fas fa-carrot text-3xl sm:text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-gray-800">Dolapta Ne Var?</h3>
+                    <p class="text-gray-600 text-sm sm:text-base max-w-xs">Elinizdeki malzemeleri girerek
+                        yapabileceğiniz tarifleri keşfedin.</p>
+                </div>
+                <div onclick="document.getElementById('searchInput').focus()"
+                    class="cursor-pointer bg-white rounded-2xl shadow-lg p-6 sm:p-10 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-2xl">
+                    <div class="bg-green-100 text-green-600 rounded-full p-4 sm:p-5 mb-4 sm:mb-6 shadow-md">
+                        <i class="fas fa-search text-3xl sm:text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-gray-800">Yemek Adıyla Ara</h3>
+                    <p class="text-gray-600 text-sm sm:text-base max-w-xs">Aradığınız yemeğin tarifini bulun ve adım
+                        adım yapılışını öğrenin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Yemek Adı ile Arama -->
+    <section class="py-12 sm:py-16 bg-gray-50" id="searchSection">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8 text-gray-900">Yemek Adıyla Ara</h2>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input type="text" id="searchInput" placeholder="Yemek adı (İngilizce) girin (örnek: kebab)"
+                    class="flex-1 p-3 sm:p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm sm:text-base" />
+                <button onclick="tarifAra()"
+                    class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 sm:px-6 py-3 sm:py-4 rounded-lg transition-colors text-sm sm:text-base">
+                    <i class="fas fa-search mr-2"></i> Tarif Ara
+                </button>
+            </div>
+            <div id="aramaSonuclari" class="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            </div>
+        </div>
+    </section>
+
+    <!-- Malzeme ile Arama -->
+    <section class="py-12 sm:py-16 bg-white" id="ingredientsSection">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8 text-gray-900">Dolapta Ne Var?</h2>
+            <div class="bg-gray-50 p-4 sm:p-6 rounded-xl shadow-md mb-6">
+                <div class="flex flex-col sm:flex-row gap-4 mb-4">
+                    <div class="relative flex-1">
+                        <input type="text" id="ingredientInput" placeholder="Malzeme (İngilizce) ekleyin (örnek: tomato)"
+                            class="w-full p-3 sm:p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm sm:text-base"
+                            autocomplete="off">
+                        <ul id="autocompleteList"
+                            class="absolute z-10 w-full bg-white border border-gray-300 rounded-b-md max-h-48 overflow-auto hidden">
+                        </ul>
+                    </div>
+                    <button onclick="malzemeEkle()"
+                        class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 sm:px-6 py-3 sm:py-4 rounded-lg transition-colors text-sm sm:text-base">
+                        <i class="fas fa-plus mr-2"></i> Ekle
+                    </button>
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-base sm:text-lg font-semibold mb-2 text-gray-800">Eklenen Malzemeler:</h3>
+                    <div id="malzemeEtiketleri" class="flex flex-wrap gap-2"></div>
+                </div>
+                <button id="tarifBulBtn" onclick="tarifleriBul()" disabled
+                    class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold px-4 sm:px-6 py-3 sm:py-4 rounded-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed text-sm sm:text-base">
+                    <i class="fas fa-utensils mr-2"></i> Tarifleri Bul
+                </button>
+            </div>
+            <div id="malzemeSonuclar" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"></div>
+        </div>
+    </section>
+
+    <!-- Rastgele Yemek Önerileri -->
+    <section class="py-12 sm:py-16 bg-gray-50" id="randomSection">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-4 sm:mb-6">
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Bugün Ne Pişirsem?</h2>
+                <button onclick="rastgeleTarifYukle()"
+                    class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base">
+                    <i class="fas fa-random mr-2"></i> Yeni Öneri
+                </button>
+            </div>
+            <div id="randomTarifler" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8 sm:py-12">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+            <div>
+                <h4 class="text-white font-bold text-3xl sm:text-4lg mb-4">Tariflerim</h4>
+                <p class="text-xs sm:text-sm leading-relaxed">Lezzetli ve pratik tariflerle evinizde şef gibi olun. En
+                    güzel yemekler parmaklarınızın ucunda!</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-base sm:text-lg mb-4">Hızlı Linkler</h4>
+                <ul class="space-y-2 text-xs sm:text-sm">
+                    <li><a href="#heroSlider" class="hover:text-orange-400 transition">Anasayfa</a></li>
+                    <li><a href="#searchSection" class="hover:text-orange-400 transition">Yemek Adıyla Ara</a></li>
+                    <li><a href="#ingredientsSection" class="hover:text-orange-400 transition">Malzeme ile Ara</a></li>
+                    <li><a href="#randomSection" class="hover:text-orange-400 transition">Rastgele Tarifler</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-base sm:text-lg mb-4">İletişim</h4>
+                <ul class="space-y-3 text-xs sm:text-sm">
+                    <li><i class="fas fa-map-marker-alt mr-2 text-orange-500"></i> İstanbul, Türkiye</li>
+                    <li><i class="fas fa-phone mr-2 text-orange-500"></i> +90 555 555 55 55</li>
+                    <li><i class="fas fa-envelope mr-2 text-orange-500"></i> destek@yemektarifleri.com</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-base sm:text-lg mb-4">Sosyal Medya</h4>
+                <div class="flex space-x-4 text-lg sm:text-2xl">
+                    <a href="#" class="hover:text-orange-400 transition" aria-label="Instagram"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-orange-400 transition" aria-label="Facebook"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-orange-400 transition" aria-label="Twitter"><i
+                            class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-orange-400 transition" aria-label="LinkedIn"><i
+                            class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 sm:mt-10 border-t border-gray-700 pt-6 text-center text-xs text-gray-500 select-none">
+            © 2025 Tariflerim. Tüm hakları saklıdır.
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+
+@import "tailwindcss";
+
+
+ .slider-fade {
+            transition: opacity 1s ease-in-out;
+        }
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Improved focus states */
+        input:focus, button:focus {
+            outline: 2px solid #f97316;
+            outline-offset: 2px;
+        }
+        /* Ensure images don't overflow */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Hide scrollbar but keep functionality */
+        .overflow-auto::-webkit-scrollbar {
+            display: none;
+        }
+        .overflow-auto {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body{
+            font-family: "Sour Gummy", sans-serif;
+        }
